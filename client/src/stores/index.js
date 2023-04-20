@@ -12,4 +12,6 @@ function rootReducer(state=initialState,{type , payload}){
     }
 }
 
-const creator = createStore(applyMiddleware(thunk))
+const store = createStore(applyMiddleware(thunk))
+
+export default store
