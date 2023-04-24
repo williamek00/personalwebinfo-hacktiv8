@@ -1,17 +1,31 @@
 import { applyMiddleware , legacy_createStore as createStore } from 'redux'
-import thunk from 'redux-thunk'
+
+const SUCCESS_FETCH = 'SUCCESS_FETCH'
+
+const initialState = {
+    data : 
+    [
+        {
+            id : 1,
+            name: "William Enos Komansilan",
+            age : 21  ,
+            liveIn : "Jakarta Utara"
+        }   
+    ]
+}
 
 function rootReducer(state=initialState,{type , payload}){
     switch (type) {
-        case value:
+        case SUCCESS_FETCH:
         return {
-            ...state
+            ...state,
+            data : payload
         }
         default:
         return state
     }
 }
 
-const store = createStore(applyMiddleware(thunk))
+const store = createStore(rootReducer)
 
 export default store

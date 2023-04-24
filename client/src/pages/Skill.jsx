@@ -1,63 +1,81 @@
+import { useSelector } from 'react-redux'
 export default function Skill() {
+    const data = useSelector(state => state.data)
     return (
         <>
+
             <div
-                className="bg-cover bg-center  h-screen w-screen"
+                className=" bg-cover bg-center  min-h-screen w-screen"
                 style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504493408076-2017927bbb1a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80  ')" }}
             >
 
+              
+                    <div class="container mx-auto p-4">
+                        <header class="text-center">
+                            <h1 class="text-4xl font-bold">About Me</h1>
+                            <p class="text-xl font-medium text-gray-600">Get to know me better</p>
+                        </header>
 
+                        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <img class="rounded-lg shadow-lg w-full" src="https://via.placeholder.com/500x500" alt="My Profile Picture" />
+                            <div class="p-4">
+                                <h2 class="text-2xl font-bold mb-2">Hi, I'm [Your Name]</h2>
+                                <p class="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus libero sed ante placerat eleifend. Suspendisse ac est sed ex dignissim tincidunt non quis metus. Vivamus tristique, nulla vel lacinia dignissim, ex orci malesuada ipsum, a suscipit quam enim vel est.</p>
+                                <p class="text-gray-700 mb-4">I am a [Your Profession] with [X] years of experience in [Your Area of Expertise]. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus libero sed ante placerat eleifend. Suspendisse ac est sed ex dignissim tincidunt non quis metus.</p>
+                                <p class="text-gray-700 mb-4">In my free time, I enjoy [Your Hobbies or Interests]. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus libero sed ante placerat eleifend. Suspendisse ac est sed ex dignissim tincidunt non quis metus. Vivamus tristique, nulla vel lacinia dignissim, ex orci malesuada ipsum, a suscipit quam enim vel est.</p>
+                            </div>
+                        </section>
+                    </div>
+        
                 <section className="py-8">
-                    <div className="container mx-auto px-4">
-                        <div className="bg-  p-4">
-                            <h1 className="text-2xl font-bold mb-4">I have learned JavaScript and am open to adapting to new programming languages</h1>
-                            <h1 className="text-2xl font-bold mb-4">This is the tech stack I have used throughout my coding experience:</h1>
+                    <div className="container mx-auto px-4 ">
+                        {data.map(item => {
+                            return (
+                                <div key={item.id}>
+                                    <h1 className='text-white'>{item.name}</h1>
+                                </div>
+                            );
+                        })}
+                        <div class="bg-gray-100 bg-opacity-50 p-4 rounded-lg ">
+                            <h1 class="text-2xl font-bold mb-4">I have learned JavaScript and am open to adapting to new programming languages</h1>
+                            <h1 class="text-2xl font-bold mb-4">This is the tech stack I have used throughout my coding experience:</h1>
                         </div>
 
+                        <br />
 
                         <div className="grid grid-cols-3 gap-5">
-                            <div className="bg-white rounded-lg shadow-lg p-4">
+                            <div className="bg-white bg-opacity-10 rounded-lg shadow-lg p-4">
                                 <h3 className="text-lg font-bold mb-2">React JS</h3>
-                                <img src="data:image/png;base64,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" alt="" />
-                               
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="" />
+
                             </div>
 
-                            <div className="bg-white rounded-lg shadow-lg p-4">
-                                <h3 className="text-lg font-bold mb-2">Card Title 2</h3>
-                                <p className="text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod aliquet nunc id tempus. Donec posuere turpis at lorem volutpat, ut sollicitudin justo dapibus.
-                                </p>
+                            <div className="bg-white  bg-opacity-10 rounded-lg shadow-lg p-4">
+                                <h3 className="text-lg font-bold mb-2">Vue JS</h3>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png" alt="" />
+
                             </div>
-                            <div className="bg-white rounded-lg shadow-lg p-4">
-                                <h3 className="text-lg font-bold mb-2">Card Title 2</h3>
-                                <p className="text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod aliquet nunc id tempus. Donec posuere turpis at lorem volutpat, ut sollicitudin justo dapibus.
-                                </p>
+                            <div className="bg-white  bg-opacity-10 rounded-lg shadow-lg p-4">
+                                <h3 className="text-lg font-bold mb-2">Node JS</h3>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" alt="" />
+
                             </div>
-                            <div className="bg-white rounded-lg shadow-lg p-4">
-                                <h3 className="text-lg font-bold mb-2">Card Title 2</h3>
-                                <p className="text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod aliquet nunc id tempus. Donec posuere turpis at lorem volutpat, ut sollicitudin justo dapibus.
-                                </p>
+                            <div className="bg-white bg-opacity-10 rounded-lg shadow-lg p-4">
+                                <h3 className="text-lg font-bold mb-2">CSS</h3>
+                                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968242.png" alt="" />
+
                             </div>
-                            <div className="bg-white rounded-lg shadow-lg p-4">
-                                <h3 className="text-lg font-bold mb-2">Card Title 2</h3>
-                                <p className="text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod aliquet nunc id tempus. Donec posuere turpis at lorem volutpat, ut sollicitudin justo dapibus.
-                                </p>
+                            <div className="bg-white bg-opacity-10 rounded-lg shadow-lg p-4">
+                                <h3 className="text-lg font-bold mb-2">HTML</h3>
+                                <img src="https://icones.pro/wp-content/uploads/2021/05/icone-html-bleue.png" alt="" />
+
                             </div>
-                            <div className="bg-white rounded-lg shadow-lg p-4">
-                                <h3 className="text-lg font-bold mb-2">Card Title 2</h3>
-                                <p className="text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod aliquet nunc id tempus. Donec posuere turpis at lorem volutpat, ut sollicitudin justo dapibus.
-                                </p>
+                            <div className="bg-white bg-opacity-10 rounded-lg shadow-lg p-4">
+                                <h3 className="text-lg font-bold mb-2">Javascript</h3>
+                                <img src="https://i0.wp.com/theicom.org/wp-content/uploads/2016/03/js-logo.png?fit=500%2C500&ssl=1&w=640" alt="" />
+
                             </div>
-                            <div className="bg-white rounded-lg shadow-lg p-4">
-                                <h3 className="text-lg font-bold mb-2">Card Title 2</h3>
-                                <p className="text-gray-600">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod aliquet nunc id tempus. Donec posuere turpis at lorem volutpat, ut sollicitudin justo dapibus.
-                                </p>
-                            </div>
+
                         </div>
                     </div>
                 </section>
